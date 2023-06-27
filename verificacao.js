@@ -9,24 +9,11 @@ var datadenascimento = window.document.getElementById("datadenascimento");
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    validarFormulario();
-});
-
-function validarFormulario() {
     validarNome();
     validarSobrenome();
-    validarEmail();
     validarSenha();
-    if (!validaremail(emailValue)) {
-        email.classList.add("formcontrol-error");
-        return;
-    }
-    else {
-        email.classList.remove("formcontrol-error");
-        email.classList.add("formcontrol-success");
-        return;
-    }
-}
+    validarEmail();
+});
 
 function validarNome() {
     if (nome.value === "") {
@@ -53,7 +40,7 @@ function validarSobrenome() {
 }
 
 function validarSenha() {
-    if (senha.value === "" &&  < 7) {
+    if (senha.value === "" || senha.value.length < 7) {
         senha.classList.add("formcontrol-error");
         return;
     }
@@ -64,6 +51,17 @@ function validarSenha() {
     }
 }
 
-function validarEmail(email) {
-    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+function validarEmail() {
+    var padraoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (padraoEmail.test(email.value) !== true) {
+        email.classList.add("formcontrol-error");
+        return;
+    } 
+    else {
+        email.classList.remove("formcontrol-error");
+        email.classList.add("formcontrol-success");
+        return;
+    }   
 }
+
+

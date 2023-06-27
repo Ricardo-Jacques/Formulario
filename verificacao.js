@@ -2,16 +2,17 @@ var form = window.document.getElementById("form");
 var nome = window.document.getElementById("nome");
 var sobrenome = window.document.getElementById("sobrenome");
 var senha = window.document.getElementById("senha"); 
+var confSenha = window.document.getElementById("confirmarsenha");
 var email = window.document.getElementById("email");
-var textoemail = window.document.getElementById("textoemail");
-var telefone = window.document.getElementById("telefone");
-var datadenascimento = window.document.getElementById("datadenascimento");
+
+
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     validarNome();
     validarSobrenome();
     validarSenha();
+    confirmarSenha();
     validarEmail();
 });
 
@@ -51,6 +52,18 @@ function validarSenha() {
     }
 }
 
+function confirmarSenha() {
+    if (senha.value !== confSenha.value || confSenha.value === "") {
+        confSenha.classList.add("formcontrol-error");
+        return;
+    }
+    else {
+        confSenha.classList.remove("formcontrol-error");
+        confSenha.classList.add("formcontrol-success");
+        return;
+    }
+}
+
 function validarEmail() {
     var padraoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (padraoEmail.test(email.value) !== true) {
@@ -63,5 +76,4 @@ function validarEmail() {
         return;
     }   
 }
-
 
